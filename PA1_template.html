@@ -9,6 +9,7 @@
 <meta name="generator" content="pandoc" />
 
 
+<meta name="author" content="Mirna van Hoek" />
 
 
 <title>Reproducible Research: Peer Assessment 1</title>
@@ -116,6 +117,8 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore">Reproducible Research: Peer Assessment 1</h1>
+<h4 class="author"><em>Mirna van Hoek</em></h4>
+<h4 class="date"><em>4 June 2017</em></h4>
 
 </div>
 
@@ -138,6 +141,11 @@ $(document).ready(function () {
 ##     intersect, setdiff, setequal, union</code></pre>
 <pre class="r"><code>library(ggplot2)
 library(knitr)</code></pre>
+</div>
+<div id="setting-global-options" class="section level2">
+<h2>Setting global options</h2>
+<p>Explicitly set echo to TRUE so R code will be visible and Set figure path, since default is not to save the figure to file</p>
+<pre class="r"><code>knitr::opts_chunk$set(fig.path='figures/', echo=TRUE)</code></pre>
 </div>
 <div id="loading-and-preprocessing-the-data" class="section level2">
 <h2>Loading and preprocessing the data</h2>

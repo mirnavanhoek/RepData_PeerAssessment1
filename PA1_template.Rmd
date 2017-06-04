@@ -1,9 +1,12 @@
 ---
 title: "Reproducible Research: Peer Assessment 1"
+author: "Mirna van Hoek"
+date: "4 June 2017"
 output: 
   html_document:
     keep_md: true
 ---
+
 ## Introduction
 
 This assignment makes use of data from a personal activity monitoring
@@ -21,6 +24,13 @@ It is written as a single R markdown document and then processed by knitr and tr
 library(dplyr)
 library(ggplot2)
 library(knitr)
+```
+
+## Setting global options
+
+Explicitly set echo to TRUE so R code will be visible and Set figure path, since default is not to save the figure to file
+```{r global_options}
+knitr::opts_chunk$set(fig.path='figures/', echo=TRUE)
 ```
 
 ## Loading and preprocessing the data
@@ -44,7 +54,7 @@ sumSteps <- activity %>% group_by(date) %>%
             summarise(totSteps=sum(steps, na.rm=T))
 ```
 Histogram of total number of steps per day:           
-```{r}
+```{r histo_steps_per_day}
 tSteps <- ggplot(data=sumSteps, aes(sumSteps$totSteps)) +
     geom_histogram(breaks=seq(min(sumSteps$totSteps), max(sumSteps$totSteps), by = 1000), 
                   col="red", 
@@ -78,7 +88,7 @@ timeSteps <- activity %>% group_by(interval) %>%
 ```
             
 Time series plot of the 5-minute interval (z-axis) and the average number of steps taken, averaged across all days (y-axis)          
-```{r}
+```{r time_series_steps_per_interval}
 ggplot(data=timeSteps, aes(timeSteps$interval, timeSteps$inSteps)) +
     geom_line( col="blue") + 
    labs(title="Average number of steps per interval") +
@@ -129,7 +139,7 @@ completeSumSteps <- completeActivity %>% group_by(date) %>%
             summarise(totSteps=sum(steps, na.rm=T))
 ```
 Histogram of total number of steps taken per day for the full dataset:           
-```{r}
+```{r histo_steps_per_day_no_missing_values}
 ctSteps <- ggplot(data=completeSumSteps, aes(completeSumSteps$totSteps)) +
     geom_histogram(breaks=seq(min(completeSumSteps$totSteps), max(completeSumSteps$totSteps), by = 1000), 
                   col="red", 
@@ -165,7 +175,7 @@ completeActivity <- completeActivity %>% mutate( we = as.factor(ifelse(weekdays(
 #### 2.Time series plots of the average number of steps per interval for weekdays and weekends
 
 A panel plot containing a time series plot of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all weekday days or weekend days (y-axis). 
-```{r}
+```{r time_series_steps_per_interval_no_missing_values}
 ctimeSteps <- completeActivity %>% group_by(we, interval) %>% 
             summarise(inSteps=mean(steps, na.rm=T))
 p <- ggplot(data=ctimeSteps, aes(ctimeSteps$interval, ctimeSteps$inSteps)) +

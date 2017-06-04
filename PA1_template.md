@@ -1,4 +1,7 @@
 # Reproducible Research: Peer Assessment 1
+Mirna van Hoek  
+4 June 2017  
+
 ## Introduction
 
 This assignment makes use of data from a personal activity monitoring
@@ -39,6 +42,14 @@ library(ggplot2)
 library(knitr)
 ```
 
+## Setting global options
+
+Explicitly set echo to TRUE so R code will be visible and Set figure path, since default is not to save the figure to file
+
+```r
+knitr::opts_chunk$set(fig.path='figures/', echo=TRUE)
+```
+
 ## Loading and preprocessing the data
 
 The assumption is made that the data csv file has been placed in the working directory.
@@ -74,7 +85,7 @@ tSteps <- ggplot(data=sumSteps, aes(sumSteps$totSteps)) +
 print(tSteps)
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-4-1.png)<!-- -->
+![](figures/histo_steps_per_day-1.png)<!-- -->
 
 #### 2. Mean and median of total number of steps taken per day
 
@@ -118,7 +129,7 @@ ggplot(data=timeSteps, aes(timeSteps$interval, timeSteps$inSteps)) +
    labs(x="interval", y="average number of steps") 
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-8-1.png)<!-- -->
+![](figures/time_series_steps_per_interval-1.png)<!-- -->
    
 #### 2. Which 5-minute interval contains the maximum number of steps?
 
@@ -190,7 +201,7 @@ ctSteps <- ggplot(data=completeSumSteps, aes(completeSumSteps$totSteps)) +
 print(ctSteps)
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-15-1.png)<!-- -->
+![](figures/histo_steps_per_day_no_missing_values-1.png)<!-- -->
 
 Mean total number of steps taken per day using the completeActivity dataset:
 
@@ -239,7 +250,7 @@ p <- ggplot(data=ctimeSteps, aes(ctimeSteps$interval, ctimeSteps$inSteps)) +
 p + facet_grid(. ~ we)
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-19-1.png)<!-- -->
+![](figures/time_series_steps_per_interval_no_missing_values-1.png)<!-- -->
 
 **Conclusion**
 
